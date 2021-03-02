@@ -1,0 +1,40 @@
+{% extends 'outer.html.twig' %}
+{% block body %}
+	<div class = "register-wrapper">
+		<h1>{{ title }}</h1>
+{% if logged_in == true %}
+	<p class="login-failed-msg">User already logged in! Click <a href=".">here</a> to go back to the homepage</p>
+{% else %}
+{% if login_msg|length > 0 %}
+	<div class="login-failed-msg">{{ login_msg }}</div>
+{% endif %}
+{% if reg_success == true %}
+	<div class="login-success-msg">Registration successful! Please <a href="./login">Click here to login.</a></div>
+{% endif %}
+			<form id="register-form" action="register" method="post">
+				<table class="login-table">
+					<tr>
+						<td><label class="text-right" for="iusername">Username:</label></td>
+						<td><input type="text" id="iusername" name="iusername"></td>
+					</tr>
+					<tr>
+						<td><label class="text-right" for="ipassword">Password:</label></td>
+						<td><input type="password" id="ipassword" name="ipassword"></td>
+					</tr>
+					<tr>
+						<td><label class="text-right" for="ipassword">Repeat Password:</label></td>
+						<td><input type="password" id="ipassword2" name="ipassword2"></td>
+					</tr>
+					<tr>
+						<td><label class="text-right" for="email">Email address:</label></td>
+						<td><input type="text" id="iemail" name="iemail"></td>
+					</tr>
+				</table>
+				</form>
+			<div class="login-buttons">
+				<input type="submit" value="Register" form="register-form" >
+				<a href="./login">Go to login page</a>
+			</div>
+		{% endif %}
+	</div>
+{% endblock %}

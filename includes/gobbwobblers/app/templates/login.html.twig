@@ -1,0 +1,31 @@
+{% extends 'outer.html.twig' %}
+{% block body %}
+	<div class = "login-wrapper">
+		<h1>{{ title }}</h1>
+		{% if logged_in == true %}
+			<p class="login-success-msg">Logged in! If you do not automatically redirect, <a href=".">click here to go back to the homepage</a></p>
+		{% else %}
+			{% if login_msg|length > 0 %}
+				<div class="login-failed-msg">{{ login_msg }}</div>
+			{% endif %}
+			<div class = "login-content">
+					<form id="login-form" action="login" method="post">
+						<table class = "login-table">
+							<tr>
+								<td><label class="text-right" for="iusername">Username:</label></td>
+								<td><input class="input-field" type="text" id="iusername" name="iusername"></td>
+							</tr>
+							<tr>
+								<td><label class="text-right" for="ipassword">Password:</label></td>
+								<td><input class="input-field" type="password" id="ipassword" name="ipassword"></td>
+							</tr>
+						</table>
+					</form>
+				<div class="login-buttons">
+					<input type="submit" value="Login" form="login-form">
+					<a href="./register">Register account</a>
+				</div>
+			</div>
+		{% endif %}
+	</div>
+{% endblock %}

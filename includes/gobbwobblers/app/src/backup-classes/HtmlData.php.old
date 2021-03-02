@@ -1,0 +1,107 @@
+<?php
+
+/**
+ * Name: HtmlData
+ * Description: Retrieves data from SQL server and returns it as an array.
+ * Author: Daniel O'Hara @ P2435725
+ */
+
+namespace Gobbwobblers;
+
+class HtmlData
+{
+
+    public $simNo, $heater1, $name, $email, $encKeypad, $timeStamp, $rowSize;
+    public $sw1, $sw2, $sw3, $sw4, $fan1;
+
+    function __construct() {
+        $this->simNo = 12345;
+        $this->heater1 = 22;
+        $this->name = "TempName";
+        $this->email = "TempEmail";
+        $this->encKeypad = "TempKeypad";
+        $this->timeStamp = "12:34:56";
+        $this->sw1 = false;
+        $this->sw2 = true;
+        $this->sw3 = false;
+        $this->sw4 = true;
+        $this->fan1 = false;
+        $this->rowSize = $this->getRowSize();
+    }
+
+    public function getData(): array {
+
+        $rowArray = [];
+        $key = 0; $arrayNo = 1;
+
+        for ($row = 0; $row < $this->rowSize; $row++) {
+            $tempArray = $this->getArray($arrayNo);
+                array_push($rowArray, $tempArray);
+            $key++; $arrayNo++;
+            if($arrayNo == 5) {
+                $arrayNo = 1;
+            }
+        }
+        return $rowArray;
+    }
+
+    public function getData1(): array {
+        $tempArray = [];
+
+
+
+
+        return $tempArray;
+    }
+
+    public function getRowSize() {
+        $rowSize = 5;
+        if ($rowSize == 0) {
+            $rowSize = "Error Database Empty.";
+            return $rowSize;
+        } else {
+            $rowSize = 10;
+            return $rowSize;
+        }
+    }
+
+    public function getArray($int): array {
+        switch($int) {
+            case 1:
+                return ['simNo' => 54321, 'name' => 'John', 'email' => 'John@chrome.com', 'switches' =>
+                    $this->convBool(false) . $this->convBool(true) . $this->convBool(false)
+                    . $this->convBool(true) . $this->convBool(false) . $this->convBool(true),
+                    'heater1' => 432, 'encKeypad' => 'KeypadTemp', 'timeStamp' => "65:43:21"];
+            case 2:
+                return ['simNo' => 99999, 'name' => 'Daniel', 'email' => 'Daniel@hotmail.com', 'switches' =>
+                    $this->convBool(false) . $this->convBool(false) . $this->convBool(false) .
+                    $this->convBool(false) . $this->convBool(false) . $this->convBool(true),
+                    'heater1' => 666, 'encKeypad' => 'TempPadPad', 'timeStamp' => "66:33:66"];
+            case 3:
+                return ['simNo' => 16561, 'name' => 'Jack', 'email' => 'Jack@hotmail.co.uk', 'switches' =>
+                    $this->convBool(true) . $this->convBool(true) . $this->convBool(true) .
+                    $this->convBool(true) . $this->convBool(true) . $this->convBool(false),
+                    'heater1' => 111, 'encKeypad' => 'KeyTempPad', 'timeStamp' => "33:66:33"];
+            case 4:
+                return ['simNo' => 89898, 'name' => 'Josh', 'email' => 'Josh@chrome.com', 'switches' =>
+                    $this->convBool(true) . $this->convBool(true) . $this->convBool(false) .
+                    $this->convBool(true) . $this->convBool(true) . $this->convBool(true),
+                    'heater1' => 232, 'encKeypad' => 'KeypadTemp', 'timeStamp' => "11:11:11"];
+            case 5:
+                return ['simNo' => 998877, 'name' => 'Lauren', 'email' => 'Lauren@gmail.com', 'switches' =>
+                    $this->convBool(true) . $this->convBool(true) . $this->convBool(false) .
+                    $this->convBool(true) . $this->convBool(true) . $this->convBool(true),
+                    'heater1' => 999, 'encKeypad' => 'KeyKeyPad', 'timeStamp' => "23:44:32"];
+        }
+    }
+
+    public function convBool($bool): string {
+        if($bool == true) {
+            return "True ";
+        } else if($bool == false) {
+            return "False ";
+        } else {
+            echo 'Error';
+        }
+    }
+}

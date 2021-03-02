@@ -1,0 +1,1 @@
+put these files in public_php/folder-name (folder-name doesn't matter it refs the includes folder anyway - htdocs/public_php/folder-name for xampp) - Lewis

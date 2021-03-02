@@ -1,0 +1,61 @@
+{% extends 'outer.html.twig' %}
+{% set row = 1 %}
+{% block body %}
+	{% if login_status == false %}
+		<div class="login-failed-wrapper">
+			<p class="login-failed-msg">You need to be logged in to view this page</p>
+			<div class="login-failed-button">
+				<a href="./register" style="display:inline;float:left">
+					<button>Click here to login</button>
+				</a>
+				<a href="./register" style="display:inline;float:left"><button>Register account</button></a>
+			</div>
+		</div>
+	{% else %}
+		<div class = "homepage-title">
+			<h1>{{ title }}</h1>
+			<p>{{ author }}</p>
+			<h3>Welcome, {{ user.username }}</h3>
+			<p>Last login: {{ user.lastLogin }}</p>
+		</div>
+		<h2>Database entries:</h2>
+		{% if emptyDatabase == true %}
+			<p class="login-failed-msg">No data available</p>
+		{% else %}
+		<table style = "text-align: center; width: 100%; margin-bottom:15px;" class="response-table">
+		<tr class = "homepage-table">
+			<th style = "width: 25px">Row</th>
+			<th>SIM Number</th>
+			<th>Name</th>
+			<th>Email Address</th>
+			<th>Switches(SW1, SW2, SW3, SW4, FAN1)</th>
+			<th>Temperature</th>
+			<th>Keypad Value</th>
+			<th>Timestamp</th>
+		</tr>
+			{% for item in array %}
+			<tr class = "homepage-tableRow" style = "width:100%">
+				<td>{{ row }}</td>
+				<td style = "text-align: center">{{ item.phonenumber }}</td>
+				<td style = "text-align: center">{{ item.name }}</td>
+				<td style = "text-align: center">{{ item.email }}</td>
+				<td style = "text-align: center">
+					{{ item.sw1?'On':'Off' }} / {{ item.sw2?'On':'Off' }} / {{ item.sw3?'On':'Off' }} / {{ item.sw4?'On':'Off' }} / {{ item.fan1?'On':'Off' }}
+				</td>
+				<td style = "text-align: center">{{ item.heater1 }} °C</td>
+				<td style = "text-align: center">{{ item.keypad }}</td>
+				<td style = "text-align: center">{{ item.timestamp }}</td>
+			</tr>
+			{% set row = row + 1 %}
+			{% endfor %}
+		</table>
+		{% endif %}
+		<div class="useful-links">
+			<h3>Useful links:</h3>
+			<div class = "homepage-buttons">
+				<a href = "./m2mResponse"><button>Get new M2M Response from M2MConnect</button></a>
+				<a href = "./logout"><button>Logout</button></a>
+			</div>
+		</div>
+	{% endif %}
+{% endblock %}

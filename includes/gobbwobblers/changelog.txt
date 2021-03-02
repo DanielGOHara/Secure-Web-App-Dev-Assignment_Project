@@ -1,0 +1,53 @@
+changelog.txt
+
+1:48 AM 18/01/2021 - Lewis
+- Removed a var_dump from one of the methods before final
+- app/settings is now the only file that contains the mysql and m2mconnect login information (consolidated)
+
+7:17 PM 17/01/2021 - Lewis
+- username and email are no longer case sensitive
+
+8:52 AM 17/01/2021 - Lewis
+- Register form has proper validation of input lengths (username 4-24, password 6-24, email 5-50)
+- Login form has proper validation of input lengths (username 4-24, password 6-24)
+
+10:58 PM 16/01/2021 - Lewis
+- Added M2M Response "Send message to database"
+	- validation, sanitization, check data types, error/success messages
+	- message duplication in the server
+	- adds message to the database
+
+8:39 PM 16/01/2021 - Commit by Lewis
+- Added 'spoofDatabase' global var in bootstrap.php
+	- change to true to spoof data from database for offline css editing
+
+3:39 AM 16/01/2021 - Commit by Lewis
+database:
+- updated db table 'message' to 'messages'
+- added 'passwordSalt':varchar(200) column to 'users' table
+php:
+- Register: added register route/template for new account creation
+	- sanitizes and validates all inputs (with special for email, passwords match)
+	- checks email and username is unique
+	- on successful sanitization, validation and uniqueness: create salt and encrypt password with it, then add all relevant information to database
+	- "registration success" message + direct users to login page
+- KeyAuth Updated: New KeyAuth for checking session key against database, more concise and reusable.
+	- DatabaseWrapper to fetches rows from 'gobbwobblersdb'.'users' where 'key' row = SessionWrapper 'user_key'. If it returns a row then the user exists.
+	- KeysPair is VERY LONG string of chars using "random_bytes()" (not based on time) e.g. "f0nSHe3U4wwuYNgEnnUfcAq6BIgAbC1RG+f2rTZinLIQVra/hnoIQC93yvUdugUSHfiEH1cvrMc0M89GdmOBScLa9dyM6dN8H6mouKPzArr/DGtXcAKLvy/nw5i9sIAxf7C+abAgKI3Uxf2mDQRU03bPQ6pSfKMSUXa4dl9REERJJQ3ZPKS8Rg8q2505EmEg2kc8fQjn". Generates on EVERY LOGIN.
+minor changes:
+- Updated "last login:" prompt on homepage to actual login time from server
+- Added user "Welcome" message on homepage
+- Removed redundant 'authentication' class
+
+###############
+TODOs:
+
+CONSIDERATION TODOs (if there's time):
+- documentation (UML, ERD, Personal statement)
+- monolog logging
+- xdebug
+- redo errors, make webErrors (String) and logErrors (Array)
+- add sendMessage (send message to M2MConnect) - fill form with random data
+- chart (js?)
+- log ALL web application activity
+- "interface to send sms messages back to the circuit board with updated settings" ?
