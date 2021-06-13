@@ -1,5 +1,5 @@
 # Secure-Web-App-Dev-Assignment_Project
-Secure Web Application Development Assignment Project (PHP, HTML, CSS, MySQL, SOAP, Twig & Slim) - First | 71% 
+Secure Web Application Development Assignment Project (PHP, HTML5, CSS3, MySQL, SOAP, Twig & Slim) - First | 71% 
 
 The project was completed working within a team of three over the course of two months. 
 
